@@ -1,0 +1,148 @@
+/* 全体 */
+.background{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* background-image: url(../img/tree.jpeg);
+    background-size: cover; */
+}
+.item{
+    width: 100px;
+    height: 125px;
+    object-fit: cover;
+    border: 0.1em solid #FADBDA;
+    box-sizing: border-box;
+}
+    
+/*  TOP */
+.top_title{
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding-top: 20px;
+}
+.top_title>p{
+    text-align: center;
+}
+.sub_title{
+    margin-bottom: 20px;
+}
+/* main */
+.main_wrapper{
+    width: auto;
+    margin-bottom: 20px;
+    display: flex;
+}
+.hagu_wrapper{
+    width: 300px;
+    margin-right: 20px;
+}
+.hagu_wrapper>p{
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.hagu_contents{
+    display: flex;
+    flex-wrap: wrap;
+    background-image: url(../img/house.jpeg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.select_wrapper{
+    margin-right: 20px;
+}
+.select_contents{
+    font-family: "Kokoro";
+    font-weight: bold;
+    width: 620px;
+    height: 820px;
+    background-image: url(../img/letter.png);
+    margin-bottom: 20px;
+}
+.select_name{
+    padding: 40px 0 0 40px;
+    margin-bottom: 20px;
+}
+.select_name>p{
+    margin-bottom: 15px;
+}
+.select_what{
+    padding: 40px 0 0 40px;
+    margin-bottom: 20px;
+}
+.select_what>p{
+    margin-bottom: 15px;
+}
+.select_size{
+    padding: 40px 0 0 40px;
+    margin-bottom: 20px;
+}
+.select_size>p{
+    margin-bottom: 15px;
+}
+.select_feeling{
+    padding: 40px 0 0 40px;
+    margin-bottom: 20px;
+}
+.select_feeling>p{
+    margin-bottom: 15px;
+}
+.select_letter{
+    padding: 40px 0 0 40px;
+    margin-bottom: 20px;
+}
+.select_letter>p{
+    margin-bottom: 15px;    
+}
+#text{
+    width: 90%;
+    height: 250px;
+}
+.iroha_wrapper{
+    width: 300px;
+}
+.iroha_wrapper>p{
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.iroha_contents{
+    display: flex;
+    flex-wrap: wrap;
+    background-image: url(../img/house.jpeg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.select_send{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* 以下、講義で使ったやつ */
+#output {
+    background: pink;
+    height: 300px;
+    overflow: scroll;
+}
+
+/* .msg:nth-child(odd) {
+    width: 40%;
+    background: gainsboro;
+    margin-left: auto;
+    border-radius: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.msg:nth-child(even) {
+    background: pink;
+    width: 40%;
+    padding: 10px;
+    border-radius: 10px;
+} */

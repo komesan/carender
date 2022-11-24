@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/main.css">
+<link href="https://fonts.googleapis.com/earlyaccess/kokoro.css" rel="stylesheet">
+<title>アドベントカレンダー</title>
+</head>
+
+<body>
+
+<!-- コンテンツ表示画面 -->
+
+<div class="background">
+    <div class="top_title">
+        <p>クリスマスプレゼントガチャ</p>
+    </div>
+    <div class="sub_title">
+        <p>どんなプレゼントがいいかな〜？</p>
+    </div>
+    <div class="main_wrapper">
+        <div class="hagu_wrapper">
+            <p>はぐむ</p>
+            <div class="hagu_contents">
+                <div class="hagu_present1 item">1</div>
+                <div class="hagu_present2 item">2</div>
+                <div class="hagu_present3 item">3</div>
+                <div class="hagu_present4 item">4</div>
+                <div class="hagu_present5 item">5</div>
+                <div class="hagu_present6 item">6</div>
+                <div class="hagu_present7 item">7</div>
+                <div class="hagu_present8 item">8</div>
+                <div class="hagu_present9 item">9</div>
+            </div>
+            <div id="output"></div>
+            <img src="img/letter_item.png" alt="">
+        </div>
+        <div class="select_wrapper">
+            <div class="select_contents">
+                <div>
+                    <div class="select_name">
+                        <p>おなまえは？</p>
+                        <form action="">
+                            <label for=""><input type="radio" name="uname" id="uname" value="はぐむ">はぐむ</label>
+                            <label for=""><input type="radio" name="uname" id="uname" value="いろは">いろは</label>
+                        </form>
+                    </div>
+                    <div class="select_what">
+                        <p>なにが欲しいの？</p>
+                        <form action="">
+                            <label for=""><input type="radio" name="things" id="things" value="おもちゃ">おもちゃ</label>
+                            <label for=""><input type="radio" name="things" id="things" value="食べもの">食べもの</label>
+                            <label for=""><input type="radio" name="things" id="things" value="わからない">わからない</label>
+                        </form>
+                    </div>
+                </div>
+                <div>
+                    <div class="select_size">
+                        <p>おおきさは？</p>
+                        <form action="">
+                            <label for=""><input type="radio" name="size" id="size" value="めっちゃ大きい">めっちゃ大きい</label>
+                            <label for=""><input type="radio" name="size" id="size" value="ふつうくらい">ふつうくらい</label>
+                            <label for=""><input type="radio" name="size" id="size" value="ちいさい">ちいさい</label>
+                        </form>
+                    </div>
+                </div>
+                <div>
+                    <div class="select_feeling">
+                        <p>どんなもの？</p>
+                        <form action="">
+                            <label for=""><input type="radio" name="feeling" id="feeling" value="おもしろいもの">おもしろいもの</label>
+                            <label for=""><input type="radio" name="feeling" id="feeling" value="かわいいもの">かわいいもの</label>
+                            <label for=""><input type="radio" name="feeling" id="feeling" value="楽しいもの">楽しいもの</label>
+                        </form>
+                    </div>
+                </div>            
+                <div>
+                    <div class="select_letter">
+                        <p>サンタさんにお手紙をかきましょう！</p>
+                        <form action="">
+                            <input type="text" id="text">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="select_send">
+                <button id="send">サンタさんに届ける！</button>
+            </div>
+        </div>
+        <div class="iroha_wrapper">
+            <p>いろは</p>
+            <div class="iroha_contents">
+                <div class="iroha_present1 item">1</div>
+                <div class="iroha_present2 item">2</div>
+                <div class="iroha_present3 item">3</div>
+                <div class="iroha_present4 item">4</div>
+                <div class="iroha_present5 item">5</div>
+                <div class="iroha_present6 item">6</div>
+                <div class="iroha_present7 item">7</div>
+                <div class="iroha_present8 item">8</div>
+                <div class="iroha_present9 item">9</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 以下、一旦非表示にしておく -->
+<!-- <div>
+    <div> 名前：<input type="text" id="uname"> </div>
+    <div>
+        <textarea id="text" cols="30" rows="10"></textarea>
+        <button id="send">送信</button>
+    </div>
+    <div id="output"></div>
+</div> -->
+<!--/ コンテンツ表示画面 -->
+
+
+
+<!-- JQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="module">
+    // Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
+import { getDatabase, ref, push, set, onChildAdded, remove,onChildRemoved } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// 関数を宣言
+let count = ""
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyCl4EMqsSHwKX5PYlUmj_2UVp4yNLcXXcc",
+    authDomain: "dev245-58925.firebaseapp.com",
+    projectId: "dev245-58925",
+    storageBucket: "dev245-58925.appspot.com",
+    messagingSenderId: "276889990744",
+    appId: "1:276889990744:web:d93bcb0677a7e7528fbc2d"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const dbRef = ref(db, 'dev245');
+
+// 送信処理を記述
+$('#send').on('click', function () {
+
+    // id="uname" の場所を取得します🤗
+    const uname = $('input:radio[name="uname"]:checked').val();
+    // console.log(uname, 'データの取得の仕方で表示が異なるのをチェックしましょう🤗')
+
+    const things = $('input:radio[name="things"]:checked').val();
+    const size = $('input:radio[name="size"]:checked').val();
+    const feeling = $('input:radio[name="feeling"]:checked').val();
+
+    // id="text" の場所を取得します🤗
+    const text = $('#text').val();
+    // console.log(text, 'データの取得の仕方で表示が異なるのをチェックしましょう🤗')
+
+    // 取得できているか表示の確認をしましょう！
+    // これ必須！ 表示の確認ができて方はalertをコメントアウトしておきましょう🤗
+    alert(uname + things + size + feeling + text);
+
+
+    // データの塊を作ります🤗
+    // msg という名前で塊を作ります
+    // unameという鍵の名前
+    // textというカギの名前
+    // 作成したデータの塊をfirebaseに送信をします⇨つまりこれが保存になります🤗
+    const msg = {
+        uname: uname,
+        things: things,
+        size: size,
+        feeling: feeling,
+        text: text,
+    }
+
+    // firebaseに送る準備をしていることになります🤗
+    const newPostRef = push(dbRef) //データを送信できる準備
+    set(newPostRef, msg); // firebaseの登録できる場所に保存するイメージです🤗
+
+    // 送信後に入力欄を空欄にする
+    $('input:radio[name="uname"]').prop('checked',false);
+    $('input:radio[name="things"]').prop('checked',false);
+    $('input:radio[name="size"]').prop('checked',false);
+    $('input:radio[name="feeling"]').prop('checked',false);
+    $('#text').val("");
+
+    // 場所を特定してカーソルを当てる
+    $('input:radio[name="uname"]').focus();
+
+    // countアップ
+    count += 1
+    console.log(count);
+
+    // 手紙のアイコンを表示
+    if (count === 1 ){
+        $('.hagu_present1').html('<img src="img/letter_item.png">');
+    }else if (count === 2){
+
+    }
+
+
+    // send送信イベント この下を消さない
+});
+
+{/* 受信処理を記述 */}
+onChildAdded(dbRef, function(data){
+const msg = data.val();
+console.log(msg, '取得したデータの塊')
+const key = data.key;
+console.log(key, 'データの塊にアクセス')
+
+// es6のテンプレートリテラル
+let h = `
+    <div class="msg">
+        <p>${msg.uname}</p>
+        <p>${msg.things}</p>
+        <p>${msg.size}</p>
+        <p>${msg.feeling}</p>
+        <p>${msg.text}</p>
+    </div>           
+`;
+    // htmlに埋め込みましょう
+    // append();というjqueryのおまじないを使いましょう
+    $("#output").append(h);
+});
+
+
+
+</script>
+<!-- JQuery -->
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
